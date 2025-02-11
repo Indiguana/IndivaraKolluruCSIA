@@ -8,18 +8,15 @@ class HomePage(tk.Frame):
 
         tk.Label(self, text="Welcome Back,\nUserName", font=("Arial", 20, "bold"), bg="#87CEFA", fg="white").place(x=400, y=30)
         
-        # Reminders Frame
         reminders_frame = tk.Frame(self, bg="#FFFF9F", padx=10, pady=10)  # Light yellow
         reminders_frame.place(x=400, y=100, width=260, height=200)
         
         tk.Label(reminders_frame, text="Your Next Reminders:", font=("Arial", 12, "bold"), bg="#FFFF9F", fg="black").pack(anchor="w")
         self.reminders_label = tk.Label(reminders_frame, text="TODAY:\n4P.M - Turn off A/C\n10:15P.M - Increase heating to 75°F\n\nTOMORROW:\n11A.M - Replace and test new light-sensitive lights\n\nMARCH 9:\n12A.M - Push clocks an hour forwards", font=("Arial", 8), justify="left", bg="#FFFF9F", fg="black")
-        self.reminders_label.pack(anchor="w")
-        
-        # "Update Reminders" Button
+        self.reminders_label.pack(anchor="w")     
+
         tk.Button(reminders_frame, text="Update Reminders", font=("Arial", 10, "bold"), bg="white", fg="black", command=self.show_update_reminders).pack(pady=5)
 
-        # Buttons Frame
         button_frame = tk.Frame(self, bg="#87CEFA")
         button_frame.place(x=50, y=100)
         
@@ -72,20 +69,17 @@ class UpdateRemindersPage(tk.Frame):
         tk.Button(self, text="Back to Home", font=("Arial", 12, "bold"), command=self.go_back).pack(pady=10)
 
     def refresh_reminder_list(self):
-        """Refresh the reminder listbox."""
         self.reminder_listbox.delete(0, tk.END)
         for reminder in self.reminders:
             self.reminder_listbox.insert(tk.END, reminder)
 
     def remove_selected_reminder(self):
-        """Remove the selected reminder."""
         selected_index = self.reminder_listbox.curselection()
         if selected_index:
             del self.reminders[selected_index[0]]
             self.refresh_reminder_list()
 
     def add_reminder(self):
-        """Add a new reminder to the list."""
         new_reminder = self.new_reminder_entry.get()
         if new_reminder:
             self.reminders.append(new_reminder)
@@ -93,6 +87,5 @@ class UpdateRemindersPage(tk.Frame):
             self.new_reminder_entry.delete(0, tk.END)
 
     def go_back(self):
-        """Return to the home page."""
         self.controller.switch_frame(HomePage)
 
