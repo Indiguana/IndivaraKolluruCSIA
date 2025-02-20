@@ -1,4 +1,7 @@
 import tkinter as tk
+from home_page import HomePage
+from energyGraph import GraphPage
+from reminders import RemindersPage
 
 class EnergyApp:
     def __init__(self, root):
@@ -16,8 +19,6 @@ class EnergyApp:
         self.current_frame.pack(fill="both", expand=True)
 
     def show_home_page(self):
-        # Import here to avoid circular import
-        from home_page import HomePage
         self.switch_frame(HomePage)
 
 if __name__ == "__main__":
