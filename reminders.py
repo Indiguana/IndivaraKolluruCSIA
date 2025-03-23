@@ -14,11 +14,11 @@ class RemindersPage(tk.Frame):
         self.configure(bg="#87CEFA")
 
 
-        # Title Label
+     
         tk.Label(self, text="⏰ Manage Your Reminders", font=("Arial", 20, "bold"), bg="#87CEFA", fg="#333333").pack(pady=10)
 
 
-        # Reminder Listbox
+
         self.reminder_listbox = tk.Listbox(self, width=50, height=10, font=("Arial", 12), bg="#FFFACD", fg="#333333", borderwidth=2, relief="sunken")
         self.reminder_listbox.pack(pady=10)
 
@@ -26,36 +26,36 @@ class RemindersPage(tk.Frame):
         self.load_reminders()
 
 
-        # Buttons with Styling
+      
         btn_style = {"font": ("Arial", 12), "bg": "#FFFACD", "fg": "#333333", "width": 30, "height": 1, "borderwidth": 2, "relief": "raised"}
         tk.Button(self, text="➕ Add Reminder", command=self.add_reminder, **btn_style).pack(pady=5)
         tk.Button(self, text="❌ Remove Selected Reminder", bg="white", fg="black", font=("Arial", 12), width=30, height=1, command=self.remove_selected_reminder).pack(pady=5)
 
 
-        # Reminder Input Fields
+
         tk.Label(self, text="Reminder Text:", font=("Arial", 12), bg="#87CEFA", fg="#333333").pack(pady=5)
         self.new_reminder_entry = tk.Entry(self, width=40, font=("Arial", 12))
         self.new_reminder_entry.pack(pady=5)
 
 
-        # Date Input
+
         tk.Label(self, text="Enter Date (YYYY-MM-DD):", font=("Arial", 12), bg="#87CEFA", fg="#333333").pack(pady=5)
         self.date_entry = tk.Entry(self, width=20, font=("Arial", 12))
         self.date_entry.pack(pady=5)
 
 
-        # Time Input
+
         tk.Label(self, text="Enter Time (HH:MM) - 24 Hour Format:", font=("Arial", 12), bg="#87CEFA", fg="#333333").pack(pady=5)
         self.time_entry = tk.Entry(self, width=20, font=("Arial", 12))
         self.time_entry.pack(pady=5)
 
 
-        # Back Button
+
         tk.Button(self, text="⬅️ Back to Home", font=("Arial", 12), bg="#FFFACD", fg="#333333", width=30, height=1, borderwidth=2, relief="raised", command=self.go_back).pack(pady=10)
 
 
     def go_back(self):
-        from home_page import HomePage  # Lazy import to fix circular import issue
+        from home_page import HomePage 
         self.controller.switch_frame(HomePage)
 
 
@@ -69,13 +69,13 @@ class RemindersPage(tk.Frame):
             self.reminders = []
 
 
-        self.sort_reminders()  # Sort as soon as reminders are loaded
+        self.sort_reminders()  
         self.refresh_reminder_list()
 
 
     def save_reminders(self):
         """ Save sorted reminders to file """
-        self.sort_reminders()  # Ensure reminders are sorted before saving
+        self.sort_reminders()  
         with open(DATA_FILE, "w") as f:
             json.dump({"reminders": self.reminders}, f, indent=4)
 
@@ -103,22 +103,22 @@ class RemindersPage(tk.Frame):
         reminder_time = self.time_entry.get()
 
 
-        # Validate Date & Time
+
         if not self.validate_datetime(reminder_date, reminder_time):
             messagebox.showerror("Invalid Input", "Please enter a valid future date and time (YYYY-MM-DD & HH:MM in 24-hour format).")
             return
 
 
-        # Convert date & time into a datetime object
+
         reminder_datetime = f"{reminder_date} {reminder_time}"
         self.reminders.append(f"{reminder_datetime} - {new_reminder}")
-        self.save_reminders()  # Sort and save
+        self.save_reminders() 
 
 
-        self.refresh_reminder_list()  # Update UI
+        self.refresh_reminder_list()  
 
 
-        # Clear fields after adding
+
         self.new_reminder_entry.delete(0, tk.END)
         self.date_entry.delete(0, tk.END)
         self.time_entry.delete(0, tk.END)
@@ -141,13 +141,13 @@ class RemindersPage(tk.Frame):
         """ Sort reminders by upcoming date and time """
         def extract_datetime(reminder):
             try:
-                date_time_str = reminder.split(" - ")[0]  # Extract date & time part
+                date_time_str = reminder.split(" - ")[0]  
                 return datetime.strptime(date_time_str, "%Y-%m-%d %H:%M")
             except ValueError:
-                return datetime.max  # If parsing fails, push to the end
+                return datetime.max 
 
 
-        self.reminders.sort(key=extract_datetime)  # Sort based on soonest reminder first
+        self.reminders.sort(key=extract_datetime)  
 
 
 
