@@ -33,10 +33,10 @@ class GraphPage(tk.Frame):
 
         ax.set_title("Energy Consumption by Appliance", fontsize=14, fontweight="bold", color="#333333")
 
-        for text in texts:
-            text.set_color("#333333")
-        for autotext in autotexts:
-            autotext.set_color("white")
+        for t in texts:
+            t.set_color("#333333")
+        for at in autotexts:
+            at.set_color("white")
 
         canvas = FigureCanvasTkAgg(fig, master=self)
         canvas.get_tk_widget().pack(pady=10)
