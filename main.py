@@ -3,7 +3,7 @@ from home_page import HomePage
 from energyGraph import GraphPage
 from reminders import RemindersPage
 from neighborhood import NeighborhoodPage
-from settings import SettingsPage  # Fixed Import Issue
+from settings import SettingsPage 
 
 
 class EnergyApp:
