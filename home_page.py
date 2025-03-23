@@ -9,7 +9,7 @@ from settings import SettingsPage
 
 
 DATA_FILE = "data.json"
-STATE_FILE = "app_state.json"  # Stores energy reset state
+STATE_FILE = "app_state.json" 
 
 
 class HomePage(tk.Frame):
@@ -19,16 +19,16 @@ class HomePage(tk.Frame):
         self.configure(bg="#87CEFA")
 
 
-        # Load energy reset state
+
         self.energy_reset = self.load_energy_reset_state()
 
 
-        # Create a main frame to hold left and right sections
+
         main_frame = tk.Frame(self, bg="#87CEFA")
         main_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
 
-        # Left Side: Buttons
+
         left_frame = tk.Frame(main_frame, bg="#87CEFA")
         left_frame.pack(side="left", fill="y", padx=20)
 
@@ -39,7 +39,7 @@ class HomePage(tk.Frame):
         btn_style = {"font": ("Arial", 14), "width": 30, "height": 2, "borderwidth": 2, "relief": "raised"}
 
 
-        # Buttons (Initially set to disabled if `energy_reset = True`)
+
         self.btn_graph = tk.Button(left_frame, text="📊 View Your Energy Consumption",
                                    command=lambda: self.controller.switch_frame(GraphPage),
                                    **btn_style, bg=("#FFFACD" if not self.energy_reset else "#D3D3D3"),
@@ -68,17 +68,17 @@ class HomePage(tk.Frame):
         self.btn_settings.pack(pady=10)
 
 
-        # "Update Energy" Button (Always Enabled)
+
         tk.Button(left_frame, text="🔄 Update Energy", font=("Arial", 14), bg="red", fg="white", width=30, height=2,
                   borderwidth=2, relief="raised", command=self.update_energy).pack(pady=10)
 
 
-        # Right Side: Reminders
+
         right_frame = tk.Frame(main_frame, bg="#87CEFA")
         right_frame.pack(side="right", fill="both", expand=True, padx=20)
 
 
-        # Upcoming Reminders
+
         tk.Label(right_frame, text="⏳ Upcoming Reminders:", font=("Arial", 16, "bold"), bg="#87CEFA", fg="#333333").pack(pady=5)
         self.reminders_frame = tk.Frame(right_frame, bg="#87CEFA")
         self.reminders_frame.pack(pady=5)
@@ -87,11 +87,11 @@ class HomePage(tk.Frame):
 
     def update_energy(self):
         """Unlocks the app by setting energy_reset to False and refreshing buttons."""
-        self.energy_reset = False  # Unlock app
-        self.save_energy_reset_state(False)  # Save updated state
+        self.energy_reset = False
+        self.save_energy_reset_state(False)  
 
 
-        # Re-enable all buttons
+
         self.btn_graph.config(state="normal", bg="#FFFACD")
         self.btn_neighborhood.config(state="normal", bg="#FFFACD")
         self.btn_reminders.config(state="normal", bg="#FFFACD")
@@ -99,18 +99,14 @@ class HomePage(tk.Frame):
 
 
         messagebox.showinfo("Success", "Energy data updated. You can now access the app.")
-
-
     def load_energy_reset_state(self):
         """Loads the energy reset state from a file (persists across sessions)."""
         try:
             with open(STATE_FILE, "r") as f:
                 data = json.load(f)
-                return data.get("energy_reset", False)  # Default to False if missing
+                return data.get("energy_reset", False)  
         except (FileNotFoundError, json.JSONDecodeError):
-            return False  # Default to False if file is missing/corrupt
-
-
+            return False  
     def save_energy_reset_state(self, state):
         """Saves the energy reset state to a file (persists across sessions)."""
         try:
@@ -118,8 +114,6 @@ class HomePage(tk.Frame):
                 json.dump({"energy_reset": state}, f, indent=4)
         except Exception as e:
             messagebox.showerror("Error", f"Could not save state: {e}")
-
-
     def load_upcoming_reminders(self):
         """Load and display the next 3 upcoming reminders"""
         try:
@@ -128,12 +122,8 @@ class HomePage(tk.Frame):
                 reminders = data.get("reminders", [])
         except FileNotFoundError:
             reminders = []
-
-
         upcoming_reminders = []
         now = datetime.now()
-
-
         for reminder in reminders:
             try:
                 date_time_str, text = reminder.split(" - ", 1)
@@ -142,21 +132,10 @@ class HomePage(tk.Frame):
                     upcoming_reminders.append((reminder_datetime, text))
             except ValueError:
                 continue
-
-
         upcoming_reminders.sort(key=lambda x: x[0])
         upcoming_reminders = upcoming_reminders[:3]
-
-
         for widget in self.reminders_frame.winfo_children():
             widget.destroy()
-
-
         if upcoming_reminders:
             for reminder in upcoming_reminders:
                 tk.Label(self.reminders_frame, text=f"📅 {reminder[0].strftime('%Y-%m-%d %H:%M')} - {reminder[1]}", font=("Arial", 12), bg="#FFFACD", fg="#333333", width=50, height=1).pack(pady=2)
-
-
-
-
-
