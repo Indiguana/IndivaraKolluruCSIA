@@ -10,77 +10,76 @@ class NeighborhoodPage(tk.Frame):
         self.configure(bg="#87CEFA")
 
 
-        # Title
+
         tk.Label(self, text="🏡 Neighborhood Energy Comparison", font=("Arial", 16, "bold"), bg="#87CEFA", fg="#333333").pack(pady=10)
 
 
-        # Create a frame to hold both sections
+
         main_frame = tk.Frame(self, bg="#87CEFA")
         main_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
 
-        # Left Section: Pie Charts (User & Neighborhood Consumption)
+
         left_frame = tk.Frame(main_frame, bg="#87CEFA")
         left_frame.pack(side="left", padx=20)
 
 
-        # User Pie Chart
+
         tk.Label(left_frame, text="⚡ Your Energy Breakdown", font=("Arial", 12, "bold"), bg="#87CEFA", fg="#333333").pack(pady=5)
         self.plot_pie_chart(left_frame, user=True)
 
 
-        # Neighborhood Pie Chart
+
         tk.Label(left_frame, text="🏘️ Neighborhood Avg Breakdown", font=("Arial", 12, "bold"), bg="#87CEFA", fg="#333333").pack(pady=10)
         self.plot_pie_chart(left_frame, user=False)
 
 
-        # Right Section: Bar Chart Comparison
+
         right_frame = tk.Frame(main_frame, bg="#87CEFA")
         right_frame.pack(side="right", padx=20)
 
 
-        # User vs Neighborhood Data
-        self.user_consumption = 450  # Example: User's monthly energy consumption (kWh)
-        self.neighborhood_avg = 380   # Example: Neighborhood average consumption (kWh)
+        self.user_consumption = 450 
+        self.neighborhood_avg = 380 
 
 
-        # Display Text Info
+
         tk.Label(right_frame, text=f"⚡ Your Monthly Usage: {self.user_consumption} kWh", font=("Arial", 12), bg="#87CEFA", fg="#333333").pack(pady=5)
         tk.Label(right_frame, text=f"🏘️ Neighborhood Avg Usage: {self.neighborhood_avg} kWh", font=("Arial", 12), bg="#87CEFA", fg="#333333").pack(pady=5)
 
 
-        # Generate Bar Chart
+
         self.plot_comparison_chart(right_frame)
 
 
-        # Suggestions
+
         if self.user_consumption > self.neighborhood_avg:
             tk.Label(right_frame, text="🔴 Your consumption is higher than average! Try reducing energy waste.", font=("Arial", 12), bg="#87CEFA", fg="red").pack(pady=5)
         else:
             tk.Label(right_frame, text="🟢 Great! Your energy usage is below the neighborhood average.", font=("Arial", 12), bg="#87CEFA", fg="green").pack(pady=5)
 
 
-        # Back Button
+
         tk.Button(self, text="⬅️ Back to Home", font=("Arial", 12), bg="#FFFACD", fg="#333333", width=30, height=1, borderwidth=2, relief="raised", command=self.go_back).pack(pady=10)
 
 
     def go_back(self):
-        from home_page import HomePage  # Lazy import to avoid circular import
+        from home_page import HomePage 
         self.controller.switch_frame(HomePage)
 
 
     def plot_pie_chart(self, parent, user=True):
         """Creates a pie chart for energy consumption breakdown"""
-        fig, ax = plt.subplots(figsize=(3, 3))  # Smaller figure for UI balance
+        fig, ax = plt.subplots(figsize=(3, 3))
 
 
         if user:
             labels = ["Heating", "Cooling", "Lighting", "Refrigerator", "Electronics"]
-            data = [30, 25, 15, 20, 10]  # Example user data
+            data = [30, 25, 15, 20, 10]  
             title = "Your Consumption"
         else:
             labels = ["Heating", "Cooling", "Lighting", "Refrigerator", "Electronics"]
-            data = [25, 20, 20, 15, 20]  # Example neighborhood data
+            data = [25, 20, 20, 15, 20] 
             title = "Neighborhood Avg"
 
 
@@ -93,10 +92,10 @@ class NeighborhoodPage(tk.Frame):
 
         for text in texts:
             text.set_color("#333333")
-            text.set_fontsize(8)  # Reduce label font size
+            text.set_fontsize(8)  
         for autotext in autotexts:
             autotext.set_color("white")
-            autotext.set_fontsize(7)  # Reduce percentage font size
+            autotext.set_fontsize(7) 
 
 
         canvas = FigureCanvasTkAgg(fig, master=parent)
@@ -106,7 +105,7 @@ class NeighborhoodPage(tk.Frame):
 
     def plot_comparison_chart(self, parent):
         """Creates a bar chart comparing user and neighborhood energy consumption"""
-        fig, ax = plt.subplots(figsize=(4, 3))  # Smaller graph for UI balance
+        fig, ax = plt.subplots(figsize=(4, 3)) 
 
 
         categories = ["You", "Neighborhood Avg"]
