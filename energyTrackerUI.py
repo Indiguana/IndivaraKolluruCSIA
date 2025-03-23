@@ -6,13 +6,13 @@ class EnergyApp:
         self.root = root
         self.root.title("Energy Efficient Home Budgeting")
         self.root.geometry("700x500")
-        self.root.configure(bg="#87CEFA")  # Light blue background
+        self.root.configure(bg="#87CEFA")  
         
         self.create_home_page()
     
     def create_home_page(self):
         """Creates the home page with navigation buttons."""
-        for widget in self.root.winfo_children():  # Clear existing widgets
+        for widget in self.root.winfo_children():  
             widget.destroy()
         
         tk.Label(self.root, text="Welcome Back,\nUserName", font=("Arial", 20, "bold"), bg="#87CEFA", fg="white").place(x=400, y=30)
