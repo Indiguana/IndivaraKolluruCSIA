@@ -15,12 +15,12 @@ class GraphPage(tk.Frame):
 
         tk.Button(self, text="⬅️ Back to Home", font=("Arial", 12), bg="#FFFACD", fg="#333333", width=30, height=1, borderwidth=2, relief="raised", command=self.go_back).pack(pady=10)
 
-
+# this is the function that allows the user to go back to the homepage
     def go_back(self):
         from home_page import HomePage
         self.controller.switch_frame(HomePage)
 
-
+#This plots the pie chart of the user's energy consumpion using matplotlib
     def plot_pie_chart(self):
         """Creates a pie chart for energy consumption distribution"""
         fig, ax = plt.subplots(figsize=(5, 5))  
