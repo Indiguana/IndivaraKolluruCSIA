@@ -28,14 +28,14 @@ class SettingsPage(tk.Frame):
 
 
     def confirm_delete(self):
-        """Asks user for confirmation before deleting all data."""
+        # Asks user for confirmation before deleting all data.
         response = messagebox.askyesno("Confirm Delete", "Are you sure you want to delete all data? This cannot be undone.")
         if response:
             self.delete_all_data()
 
 
     def delete_all_data(self):
-        """Deletes all reminders and sets `energy_reset = True`"""
+        # Deletes all reminders and sets `energy_reset = True`
         try:
             with open(DATA_FILE, "w") as f:
                 json.dump({"reminders": []}, f, indent=4)
@@ -52,7 +52,7 @@ class SettingsPage(tk.Frame):
 
 
     def save_energy_reset_state(self, state):
-        """Saves energy reset state to a file (persists across restarts)."""
+        # Saves energy reset state to a file (persists across restarts).
         try:
             with open(STATE_FILE, "w") as f:
                 json.dump({"energy_reset": state}, f, indent=4)
