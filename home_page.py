@@ -39,7 +39,7 @@ class HomePage(tk.Frame):
         btn_style = {"font": ("Arial", 14), "width": 30, "height": 2, "borderwidth": 2, "relief": "raised"}
 
 
-
+        # the next few buttons are to set up connections to the other pages and featuers of the app
         self.btn_graph = tk.Button(left_frame, text="📊 View Your Energy Consumption",
                                    command=lambda: self.controller.switch_frame(GraphPage),
                                    **btn_style, bg=("#FFFACD" if not self.energy_reset else "#D3D3D3"),
@@ -86,7 +86,7 @@ class HomePage(tk.Frame):
 
 
     def update_energy(self):
-        """Unlocks the app by setting energy_reset to False and refreshing buttons."""
+        #Unlocks the app by setting energy_reset to False and refreshing buttons.
         self.energy_reset = False
         self.save_energy_reset_state(False)  
 
@@ -100,7 +100,7 @@ class HomePage(tk.Frame):
 
         messagebox.showinfo("Success", "Energy data updated. You can now access the app.")
     def load_energy_reset_state(self):
-        """Loads the energy reset state from a file (persists across sessions)."""
+        # Loads the energy reset state from a file, which reamains across different sessions.
         try:
             with open(STATE_FILE, "r") as f:
                 data = json.load(f)
@@ -115,7 +115,7 @@ class HomePage(tk.Frame):
         except Exception as e:
             messagebox.showerror("Error", f"Could not save state: {e}")
     def load_upcoming_reminders(self):
-        """Load and display the next 3 upcoming reminders"""
+        # Load and display the next 3 upcoming reminders
         try:
             with open(DATA_FILE, "r") as f:
                 data = json.load(f)
