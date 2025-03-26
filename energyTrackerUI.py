@@ -11,7 +11,7 @@ class EnergyApp:
         self.create_home_page()
     
     def create_home_page(self):
-        """Creates the home page with navigation buttons."""
+        # Creates the home page with navigation buttons.
         for widget in self.root.winfo_children():  
             widget.destroy()
         
