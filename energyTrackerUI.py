@@ -1,3 +1,5 @@
+'''
+THIS CODE IS NOT USED ANYMORE
 import tkinter as tk
 from tkinter import ttk
 
@@ -54,6 +56,7 @@ class EnergyApp:
         tk.Label(frame, text=title, font=("Arial", 14, "bold"), bg="#ffffff").pack(pady=10)
         ttk.Button(frame, text="Back to Home", command=self.create_home_page).pack(pady=10, fill="x")
 if __name__ == "__main__":
+'''
     root = tk.Tk()
     app = EnergyApp(root)
     root.mainloop()
