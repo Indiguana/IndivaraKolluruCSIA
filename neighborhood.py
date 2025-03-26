@@ -69,7 +69,7 @@ class NeighborhoodPage(tk.Frame):
 
 
     def plot_pie_chart(self, parent, user=True):
-        """Creates a pie chart for energy consumption breakdown"""
+        # Creates a pie chart for energy consumption breakdown
         fig, ax = plt.subplots(figsize=(3, 3))
 
 
@@ -104,7 +104,7 @@ class NeighborhoodPage(tk.Frame):
 
 
     def plot_comparison_chart(self, parent):
-        """Creates a bar chart comparing user and neighborhood energy consumption"""
+        # Creates a bar chart comparing user and neighborhood energy consumption
         fig, ax = plt.subplots(figsize=(4, 3)) 
 
 
