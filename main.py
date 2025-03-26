@@ -19,7 +19,7 @@ class EnergyApp:
 
 
     def switch_frame(self, frame_class):
-        """Destroy current frame and load a new one"""
+        #Destroy current frame and load a new one
         if self.current_frame:
             self.current_frame.destroy()
         self.current_frame = frame_class(self.root, self)
