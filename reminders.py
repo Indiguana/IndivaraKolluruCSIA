@@ -60,7 +60,7 @@ class RemindersPage(tk.Frame):
 
 
     def load_reminders(self):
-        """ Load reminders and sort them by upcoming time """
+        # Load reminders and sort them by upcoming time
         try:
             with open(DATA_FILE, "r") as f:
                 data = json.load(f)
@@ -74,21 +74,21 @@ class RemindersPage(tk.Frame):
 
 
     def save_reminders(self):
-        """ Save sorted reminders to file """
+        # Save sorted reminders to file
         self.sort_reminders()  
         with open(DATA_FILE, "w") as f:
             json.dump({"reminders": self.reminders}, f, indent=4)
 
 
     def refresh_reminder_list(self):
-        """ Refresh UI listbox to display sorted reminders """
+        #  Refresh UI listbox to display sorted reminders
         self.reminder_listbox.delete(0, tk.END)
         for reminder in self.reminders:
             self.reminder_listbox.insert(tk.END, reminder)
 
 
     def remove_selected_reminder(self):
-        """ Remove the selected reminder """
+        #  Remove the selected reminder
         selected_index = self.reminder_listbox.curselection()
         if selected_index:
             del self.reminders[selected_index[0]]
@@ -97,7 +97,7 @@ class RemindersPage(tk.Frame):
 
 
     def add_reminder(self):
-        """ Add a new reminder and sort list """
+        # Add a new reminder and sort list
         new_reminder = self.new_reminder_entry.get()
         reminder_date = self.date_entry.get()
         reminder_time = self.time_entry.get()
@@ -125,7 +125,7 @@ class RemindersPage(tk.Frame):
 
 
     def validate_datetime(self, date_str, time_str):
-        """ Validates that the date is in YYYY-MM-DD format and time is in HH:MM (24-hour format), and it must be in the future """
+        #  Checks that the date is in YYYY-MM-DD format and time is in HH:MM (24-hour format), and it must be in the future
         try:
             reminder_datetime = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
             now = datetime.now()
@@ -138,7 +138,7 @@ class RemindersPage(tk.Frame):
 
 
     def sort_reminders(self):
-        """ Sort reminders by upcoming date and time """
+        # Sort reminders by upcoming date and time
         def extract_datetime(reminder):
             try:
                 date_time_str = reminder.split(" - ")[0]  
